@@ -30,7 +30,7 @@ Node
 ---
 
 ```javascript
-import { createCanvas } from 'canvas'; 
+import { createCanvas } from 'canvas';
 import { renderIcon } from '@download/blockies';
 
 const canvas = createCanvas(50, 50);
@@ -66,7 +66,13 @@ Alternative Styles
 Build
 -----
 
-    npm run build
+    pnpm build
+
+
+Development
+-----------
+
+    pnpm dev
 
 License
 -------
