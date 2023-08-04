@@ -5,6 +5,7 @@
   "main": "dist/blockies.js",
   "module": "src/blockies.mjs",
   "scripts": {
+    "prettier:format": "prettier --plugin-search-dir . --write .",
     "build": "rollup -f cjs src/blockies.mjs -o dist/blockies.js && minify dist/blockies.js -o dist/blockies.min.js",
     "serve": "ts-node examples/server.ts",
     "dev": "pnpm serve"
@@ -25,6 +26,7 @@
     "babel-minify": "^0.5.2",
     "koa": "^2.14.2",
     "koa-static": "^5.0.0",
+    "prettier": "^3.0.1",
     "rollup": "^3.27.2",
     "ts-node": "^10.9.1"
   },

@@ -1,74 +1,76 @@
 <!doctype html>
 <head>
   <style>
-  body {
-    background: #f1f1f1;
-    text-align: center;
-  }
+    body {
+      background: #f1f1f1;
+      text-align: center;
+    }
 
-  img, canvas {
-    display: inline-block;
-    margin: 10px;
-  }
+    img,
+    canvas {
+      display: inline-block;
+      margin: 10px;
+    }
 
-  .container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-  }
+    .container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
 
-  .wrapper {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    gap: 0.25rem;
-  }
+    .wrapper {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      gap: 0.25rem;
+    }
   </style>
 </head>
 <body>
   <script type="module">
-    import { createIcon } from '/blockies.mjs';
+    import { createIcon } from "/blockies.mjs";
 
     const addresses = [
-      '0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359',
-      '0x554f8e6938004575bd89cbef417aea5c18140d92',
-      '0xcc6294200fa6e6eb5c3034ed6b0b80401f5b0ceb',
-      '0xbb9bc244d798123fde783fcc1c72d3bb8c189413',
-      '0x6090a6e47849629b7245dfa1ca21d94cd15878ef',
-      '0x314159265dd8dbb310642f98f50c066173c1259b'
+      "0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359",
+      "0x554f8e6938004575bd89cbef417aea5c18140d92",
+      "0xcc6294200fa6e6eb5c3034ed6b0b80401f5b0ceb",
+      "0xbb9bc244d798123fde783fcc1c72d3bb8c189413",
+      "0x6090a6e47849629b7245dfa1ca21d94cd15878ef",
+      "0x314159265dd8dbb310642f98f50c066173c1259b",
     ];
 
-    for(let i = 0; i < 128; ++i) {
+    for (let i = 0; i < 128; ++i) {
       addresses.push(
         [
-          '0x',
-          ...Array.from({length: 4})
-            .map(() => Math.floor(Math.random() * Math.pow(10,10)).toString(16)),
-        ].join(''),
+          "0x",
+          ...Array.from({ length: 4 }).map(() =>
+            Math.floor(Math.random() * Math.pow(10, 10)).toString(16)
+          ),
+        ].join("")
       );
     }
 
-    const container = document.createElement('div');
-    container.setAttribute('class', 'container')
+    const container = document.createElement("div");
+    container.setAttribute("class", "container");
     document.body.appendChild(container);
 
-    for(let i = 0; i < addresses.length; i++) {
+    for (let i = 0; i < addresses.length; i++) {
       const seed = addresses[i].toLowerCase();
 
       const canvas = createIcon({
         seed,
         size: 10,
-        scale: 8
+        scale: 8,
       });
 
-      const wrapper = document.createElement('div');
-      wrapper.setAttribute('class', 'wrapper');
+      const wrapper = document.createElement("div");
+      wrapper.setAttribute("class", "wrapper");
       wrapper.appendChild(canvas);
 
       container.appendChild(wrapper);
 
-      const address = document.createElement('p');
-      address.textContent = [seed.slice(0, 4), seed.slice(-4)].join('...');
+      const address = document.createElement("p");
+      address.textContent = [seed.slice(0, 4), seed.slice(-4)].join("...");
       wrapper.appendChild(address);
     }
   </script>
