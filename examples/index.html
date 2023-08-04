@@ -1,9 +1,14 @@
 <!doctype html>
 <head>
   <style>
+    * {
+      margin: 0;
+    }
+
     body {
       background: #f1f1f1;
       text-align: center;
+      margin: 1rem;
     }
 
     img,
@@ -12,10 +17,23 @@
       margin: 10px;
     }
 
+    #address-form {
+      margin: 1rem 0;
+    }
+
+    #address {
+      width: 320px;
+    }
+
+    #generated {
+      margin: 1rem 0;
+    }
+
     .container {
       display: flex;
       flex-flow: row wrap;
       justify-content: center;
+      margin: 1rem 0;
     }
 
     .wrapper {
@@ -27,38 +45,33 @@
   </style>
 </head>
 <body>
+  <form id="address-form" onsubmit="return generateIcon()">
+    <label for="address">Address</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      value="bc1q7n4xltvsjhs3kctjzwv6dc00sycez9cd9x8ls2"
+    />
+    <button type="submit">Generate</button>
+  </form>
+
+  <div id="generated"></div>
+
   <script type="module">
     import { createIcon } from "/blockies.mjs";
 
-    const addresses = [
-      "0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359",
-      "0x554f8e6938004575bd89cbef417aea5c18140d92",
-      "0xcc6294200fa6e6eb5c3034ed6b0b80401f5b0ceb",
-      "0xbb9bc244d798123fde783fcc1c72d3bb8c189413",
-      "0x6090a6e47849629b7245dfa1ca21d94cd15878ef",
-      "0x314159265dd8dbb310642f98f50c066173c1259b",
-    ];
+    window.generateIcon = (event) => {
+      const address = document.getElementById("address").value;
+      const generated = document.getElementById("generated");
+      generated.innerHTML = "";
+      generated.appendChild(renderIcon(address, true));
+      return false;
+    };
 
-    for (let i = 0; i < 128; ++i) {
-      addresses.push(
-        [
-          "0x",
-          ...Array.from({ length: 4 }).map(() =>
-            Math.floor(Math.random() * Math.pow(10, 10)).toString(16)
-          ),
-        ].join("")
-      );
-    }
-
-    const container = document.createElement("div");
-    container.setAttribute("class", "container");
-    document.body.appendChild(container);
-
-    for (let i = 0; i < addresses.length; i++) {
-      const seed = addresses[i].toLowerCase();
-
+    function renderIcon(address, fullAddress = false) {
       const canvas = createIcon({
-        seed,
+        seed: address,
         size: 10,
         scale: 8,
       });
@@ -67,11 +80,66 @@
       wrapper.setAttribute("class", "wrapper");
       wrapper.appendChild(canvas);
 
-      container.appendChild(wrapper);
+      const addressElement = document.createElement("p");
+      addressElement.textContent = fullAddress
+        ? address
+        : [address.slice(0, 4), address.slice(-4)].join("...");
+      wrapper.appendChild(addressElement);
 
-      const address = document.createElement("p");
-      address.textContent = [seed.slice(0, 4), seed.slice(-4)].join("...");
-      wrapper.appendChild(address);
+      return wrapper;
     }
+
+    const addressGroups = {
+      segwit: [
+        "3Ndk7vKHwXTRQPxeVV7MvSugWchM8UVeXY",
+        "39mqBF1jY4t3ZShTvgWXrT6ouKM1UCSX89",
+        "381K78KWnKMJSJ8QGTVC8dfQTQHWqA3rVh",
+        "32fEfRXyPU3En5ypkMBecGFdfQoJDQu4H6",
+        "3FLDXJUQKvXA9j2ycKMd9xJAYnQdo4DKqn",
+        "37K8J1ZmoM9KgcCwmZ2o7ocE9BPDgJM17w",
+        "3PJopn8nHc2xFe1QXUSHyxz6S7JnD8UQRe",
+        "3NMvNacXKUCHUJvi2zG4VMNrFXF1AGE2RV",
+        "3M5FWqMBbptuw2j2udW3uNJDGxdDWexbj4",
+        "39DXTJTwkAq5tAhxcKk8CdRk5DWQqyPf89",
+      ],
+      segwitBech32: [
+        "bc1q7n4xltvsjhs3kctjzwv6dc00sycez9cd9x8ls2",
+        "bc1qfl5gwrkaz7ra5v7na6w6j2x06g54wc8vf4z2a0",
+        "bc1q7cglup2v8w2l32amzepv27vlvwh84758ctpayd",
+        "bc1q8wh4gteuqnj5hcyptruse20ht8eyn2rad98765",
+        "bc1qj8x0ldlpelp8lhry0ej529rup4gxwywnfstggu",
+        "bc1q93trsjt3mpcjdfar0r063m6y9q4lvy93t0zg5q",
+        "bc1qfd5334e9n40pkzkzjktenxsrglg9ecp66c4e3y",
+        "bc1qgr50ht5gwjfv8hngq33fd3d22u3rc868wp6ame",
+        "bc1q26c0lyejc53nzyjwu9q4ku7m5c84f3np5n5mtz",
+        "bc1qp6m720vgkggu9eyk6wg48zhktcjrxevrdmhnk0",
+      ],
+      legacy: [
+        "1AT6VKLuSUNuogToc7UhNQNYwVyRThAW5u",
+        "1K7xTRMHD5q4urNpZUX8ke8meHe1C9NbqL",
+        "1CtfDbeG8RJS4y9XhyMCEXNczQXoBt3EZr",
+        "165ULTGqjxR3LMt76T6crqcQt6xnaUrVtx",
+        "1K5X1ximkY7KvCBG82VyDgojgMuH9mHfiF",
+        "1PnjnmwTAck9DfRtPQjrWCs7udiJYrQthm",
+        "17kPoKJ43UeA6s6uUHMmmeHbhu1ggFQbTJ",
+        "1FDdNrf3BqDaPv7U5WyykEJLey1C7ihcKf",
+        "1KncQFZjbrt41xxsSR7ANTMSRePMWWLpbG",
+        "14osYDuLdhg4fP6ZffRQiyg5tucfRyDKKy",
+      ],
+    };
+
+    Object.entries(addressGroups).forEach(([name, addresses]) => {
+      const header = document.createElement("h2");
+      header.textContent = name;
+      document.body.appendChild(header);
+      const container = document.createElement("div");
+      container.setAttribute("class", "container");
+      document.body.appendChild(container);
+
+      addresses.forEach((address) => {
+        const icon = renderIcon(address);
+        container.appendChild(icon);
+      });
+    });
   </script>
 </body>

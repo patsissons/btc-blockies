@@ -8,7 +8,8 @@
     "prettier:format": "prettier --plugin-search-dir . --write .",
     "build": "rollup -f cjs src/blockies.mjs -o dist/blockies.js && minify dist/blockies.js -o dist/blockies.min.js",
     "serve": "ts-node examples/server.ts",
-    "dev": "pnpm serve"
+    "dev": "pnpm serve",
+    "start": "pnpm serve"
   },
   "repository": {
     "type": "git",
