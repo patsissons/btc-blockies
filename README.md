@@ -2,9 +2,9 @@
 
 A tiny library for generating blocky identicons.
 
-![Sample blockies image](examples/sample.png "Blockies")
+![Sample blockies image](examples/btc-sample.png "Blockies")
 
-[**Demo page**](http://download13.github.io/blockies/)
+[**Demo page**](https://btc-blockies.vercel.app/)
 
 ## Browser
 
@@ -42,7 +42,7 @@ var icon = renderIcon(
     size: 15, // width/height of the icon in blocks, default: 10
     scale: 3, // width/height of each block in pixels, default: 5
   },
-  canvas,
+  canvas
 );
 ```
 
