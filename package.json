@@ -4,6 +4,11 @@
   "description": "A tiny library for generating blocky identicons.",
   "main": "dist/blockies.js",
   "module": "src/blockies.mjs",
+  "engines": {
+    "pnpm": "^10",
+    "node": "^22"
+  },
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "prettier:format": "prettier --plugin-search-dir . --write .",
     "build": "rollup -f cjs src/blockies.mjs -o dist/blockies.js && minify dist/blockies.js -o dist/blockies.min.js",
